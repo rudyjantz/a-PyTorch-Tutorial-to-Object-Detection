@@ -1,0 +1,49 @@
+cporter 2022.02.09
+
+To get the VOC data, I believe I just created a download/ folder at the top
+level of this repo, and I followed this part of the original README.md:
+
+    https://github.com/rudyjantz/a-PyTorch-Tutorial-to-Object-Detection#download
+
+    Download
+
+    Specfically, you will need to download the following VOC datasets –
+
+        2007 trainval (460MB)
+
+        2012 trainval (2GB)
+
+        2007 test (451MB)
+
+    Consistent with the paper, the two trainval datasets are to be used for
+    training, while the VOC 2007 test will serve as our test data.
+
+    Make sure you extract both the VOC 2007 trainval and 2007 test data to the
+    same location, i.e. merge them.
+
+The README.md file has them hyperlinked.
+
+To merge VOC 2007 trainval and 2007 test, I just `tar xf`'d  them into the same
+folder.
+
+
+And then I just followed the first steps of Training in README.md:
+    https://github.com/rudyjantz/a-PyTorch-Tutorial-to-Object-Detection#training
+
+    Training
+
+    Before you begin, make sure to save the required data files for training
+    and evaluation. To do this, run the contents of create_data_lists.py after
+    pointing it to the VOC2007 and VOC2012 folders in your downloaded data.
+
+    See train.py.
+
+    The parameters for the model (and training it) are at the beginning of the
+    file, so you can easily check or modify them should you need to.
+
+    To train your model from scratch, run this file –
+
+      python train.py
+
+One last note: I renamed this repo's folder to object-detection before running
+any experiments with train.py

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 import torch.backends.cudnn as cudnn
 import torch.optim
@@ -7,7 +8,7 @@ from datasets import PascalVOCDataset
 from utils import *
 
 # Data parameters
-data_folder = './'  # folder with data files
+data_folder = '/nethome/cporter35/isolated-bmarks/object-detection/'  # folder with data files
 keep_difficult = True  # use objects considered difficult to detect?
 
 # Model parameters
@@ -68,14 +69,17 @@ def main():
     train_dataset = PascalVOCDataset(data_folder,
                                      split='train',
                                      keep_difficult=keep_difficult)
-    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True,
+    #train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True,
+    sub_train_dataset = torch.utils.data.Subset(train_dataset, list(range(0, 2000)))
+    train_loader = torch.utils.data.DataLoader(sub_train_dataset, batch_size=batch_size, shuffle=True,
                                                collate_fn=train_dataset.collate_fn, num_workers=workers,
                                                pin_memory=True)  # note that we're passing the collate function here
 
     # Calculate total number of epochs to train and the epochs to decay learning rate at (i.e. convert iterations to epochs)
     # To convert iterations to epochs, divide iterations by the number of iterations per epoch
     # The paper trains for 120,000 iterations with a batch size of 32, decays after 80,000 and 100,000 iterations
-    epochs = iterations // (len(train_dataset) // 32)
+    #epochs = iterations // (len(train_dataset) // 32)
+    epochs = 1
     decay_lr_at = [it // (len(train_dataset) // 32) for it in decay_lr_at]
 
     # Epochs
